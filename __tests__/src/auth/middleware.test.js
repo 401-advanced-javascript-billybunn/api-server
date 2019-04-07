@@ -134,4 +134,3 @@ describe('Auth Middleware', () => {
   }); // describe()
 
 });
-

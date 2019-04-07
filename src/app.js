@@ -13,8 +13,6 @@ const cors = require('cors');
 const morgan = require('morgan');
 
 // Esoteric Resources
-console.log('cwd', cwd);
-console.log('dirname', __dirname);
 const errorHandler = require(`${__dirname}/middleware/500.js`);
 const notFound = require(`${__dirname}/middleware/404.js`);
 const authRouter = require(`${__dirname}/auth/router.js`);
