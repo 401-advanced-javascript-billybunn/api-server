@@ -3,18 +3,23 @@
 process.env.SECRET = 'test';
 
 const jwt = require('jsonwebtoken');
+const populateRoles = require('./middleware/populate-roles.js');
 
-const Roles = require('../../../src/auth/roles-model.js');
+// const Roles = require('../../../src/auth/roles-model.js');
 const server = require('../../../src/app.js').server;
 const supergoose = require('../../supergoose.js');
 
 const mockRequest = supergoose.server(server);
+
+populateRoles();
 
 let users = {
   admin: {username: 'admin', password: 'password', role: 'admin'},
   editor: {username: 'editor', password: 'password', role: 'editor'},
   user: {username: 'user', password: 'password', role: 'user'},
 };
+
+
 
 beforeAll(async (done) => {
   await supergoose.startDB();
@@ -33,7 +38,7 @@ describe('Auth Router', () => {
       let encodedToken;
       let id;
       
-      xit('can create one', () => {
+      it('can create one', () => {
         return mockRequest.post('/signup')
           .send(users[userType])
           .then(results => {
