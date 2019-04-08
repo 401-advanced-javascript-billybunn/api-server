@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Model</title>
+    <title>JSDoc: Namespace: authRouter</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Model</h1>
+    <h1 class="page-title">Namespace: authRouter</h1>
 
     
 
@@ -28,8 +28,8 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>
-            <span class="ancestors"><a href="module-models_mongo-model.html">models/mongo-model</a>~</span>Model<span class="signature">(schema)</span><span class="type-signature"></span></h2>
+        <h2>
+            <span class="ancestors"><a href="module-src_auth_router.html">src/auth/router</a>~</span>authRouter</h2>
         
     
 </header>
@@ -38,80 +38,10 @@
     <div class="container-overview">
     
         
-
-    
-
-    
-    <h4 class="name" id="Model"><span class="type-signature"></span>new Model<span class="signature">(schema)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Model constructor function. Any new instance is created by passing in a schema to define the structure of the data in each model.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
+            <div class="description">Express router to mount authentication-related functions on</div>
         
 
         
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>schema</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">An outline of the fields and pieces of data that are required by each data model. This may vary in each Model instance, e.g., the Players data model may have different required fields in its schema than the Teams data model.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
 
 
 <dl class="details">
@@ -143,7 +73,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_mongo-model.js.html">models/mongo-model.js</a>, <a href="models_mongo-model.js.html#line12">line 12</a>
+        <a href="auth_router.js.html">auth/router.js</a>, <a href="auth_router.js.html#line15">line 15</a>
     </li></ul></dd>
     
 
@@ -155,22 +85,7 @@
 </dl>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
     
     </div>
 
@@ -197,7 +112,7 @@
     
 
     
-    <h4 class="name" id="delete"><span class="type-signature"></span>delete<span class="signature">(_id)</span><span class="type-signature"> &rarr; {object}</span></h4>
+    <h4 class="name" id=".get/oauth"><span class="type-signature">(static) </span>get/oauth<span class="signature">(path, middleware)</span><span class="type-signature"></span></h4>
     
 
     
@@ -205,7 +120,7 @@
 
 
 <div class="description">
-    Makes an http DELETE request to destroy an existing record in the database
+    Route for OAuth sign-in using Google Plus
 </div>
 
 
@@ -241,7 +156,7 @@
 
         <tr>
             
-                <td class="name"><code>_id</code></td>
+                <td class="name"><code>path</code></td>
             
 
             <td class="type">
@@ -257,7 +172,30 @@
 
             
 
-            <td class="description last">Unique identifier of an individual record (UUID format)</td>
+            <td class="description last">Express path</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>middleware</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">callback</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express middleware (req, res, next)</td>
         </tr>
 
     
@@ -298,7 +236,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_mongo-model.js.html">models/mongo-model.js</a>, <a href="models_mongo-model.js.html#line50">line 50</a>
+        <a href="auth_router.js.html">auth/router.js</a>, <a href="auth_router.js.html#line82">line 82</a>
     </li></ul></dd>
     
 
@@ -321,28 +259,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    Empty object to indicate that record was successfully deleted.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">object</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -354,7 +270,7 @@
     
 
     
-    <h4 class="name" id="get"><span class="type-signature"></span>get<span class="signature">(_id)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".post/key"><span class="type-signature">(static) </span>post/key<span class="signature">(path, auth, middleware)</span><span class="type-signature"></span></h4>
     
 
     
@@ -362,7 +278,7 @@
 
 
 <div class="description">
-    Makes an http GET request for an individual record (by _id) or a list of all records if no _id is provided
+    Route for returning a permanent user token
 </div>
 
 
@@ -398,7 +314,7 @@
 
         <tr>
             
-                <td class="name"><code>_id</code></td>
+                <td class="name"><code>path</code></td>
             
 
             <td class="type">
@@ -414,142 +330,20 @@
 
             
 
-            <td class="description last">Unique identifier of an individual record (UUID format)</td>
+            <td class="description last">Express path</td>
         </tr>
 
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_mongo-model.js.html">models/mongo-model.js</a>, <a href="models_mongo-model.js.html#line21">line 21</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    The result of the query, either an individual record or all records in a collection.
-</div>
-
-
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="post"><span class="type-signature"></span>post<span class="signature">(record)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Makes an http POST request to create a new record in a database.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
     
 
         <tr>
             
-                <td class="name"><code>record</code></td>
+                <td class="name"><code>auth</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">callback</span>
 
 
             
@@ -559,7 +353,30 @@
 
             
 
-            <td class="description last">New record to write to database in JSON format. Must contain required fields defined in schema.</td>
+            <td class="description last">Authentication middleware</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>middleware</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">callback</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express middleware (req, res, next)</td>
         </tr>
 
     
@@ -600,7 +417,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_mongo-model.js.html">models/mongo-model.js</a>, <a href="models_mongo-model.js.html#line30">line 30</a>
+        <a href="auth_router.js.html">auth/router.js</a>, <a href="auth_router.js.html#line98">line 98</a>
     </li></ul></dd>
     
 
@@ -634,7 +451,7 @@
     
 
     
-    <h4 class="name" id="put"><span class="type-signature"></span>put<span class="signature">(_id, record)</span><span class="type-signature"> &rarr; {object}</span></h4>
+    <h4 class="name" id=".post/signin"><span class="type-signature">(static) </span>post/signin<span class="signature">(path, auth, middleware)</span><span class="type-signature"></span></h4>
     
 
     
@@ -642,7 +459,7 @@
 
 
 <div class="description">
-    Makes an http PUT request to edit an existing record in the database
+    Route for signing-in a user
 </div>
 
 
@@ -678,7 +495,7 @@
 
         <tr>
             
-                <td class="name"><code>_id</code></td>
+                <td class="name"><code>path</code></td>
             
 
             <td class="type">
@@ -694,20 +511,20 @@
 
             
 
-            <td class="description last">Unique identifier of an individual record (UUID format)</td>
+            <td class="description last">Express path</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>record</code></td>
+                <td class="name"><code>auth</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">callback</span>
 
 
             
@@ -717,7 +534,30 @@
 
             
 
-            <td class="description last">Updated record to write to database in JSON format. Must contain required fields defined in schema.</td>
+            <td class="description last">Authentication middleware</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>middleware</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">callback</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express middleware (req, res, next)</td>
         </tr>
 
     
@@ -758,7 +598,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_mongo-model.js.html">models/mongo-model.js</a>, <a href="models_mongo-model.js.html#line41">line 41</a>
+        <a href="auth_router.js.html">auth/router.js</a>, <a href="auth_router.js.html#line68">line 68</a>
     </li></ul></dd>
     
 
@@ -781,28 +621,164 @@
 
 
 
-<h5>Returns:</h5>
+
+
+
+
 
         
-<div class="param-desc">
-    Updated record from the database
+            
+
+    
+
+    
+    <h4 class="name" id=".post/signup"><span class="type-signature">(static) </span>post/signup<span class="signature">(path, middleware)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Route for signing-up a new user to the database
 </div>
 
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
         
-<span class="param-type">object</span>
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
 
 
-    </dd>
-</dl>
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express path</td>
+        </tr>
 
     
+
+        <tr>
+            
+                <td class="name"><code>middleware</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">callback</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express middleware (req, res, next)</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="auth_router.js.html">auth/router.js</a>, <a href="auth_router.js.html#line47">line 47</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

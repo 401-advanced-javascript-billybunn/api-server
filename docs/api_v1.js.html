@@ -34,22 +34,33 @@
  * @module src/api/v1
  */
 
-const cwd = process.cwd();
+const cwd = process.cwd(); // current working directory
 
+/**
+ * Express module
+ * @const
+ */
 const express = require('express');
+
 const swagger = require('swagger-ui-express');
 
 const modelFinder = require(`${cwd}/src/middleware/model-finder.js`);
-const swaggerDocs = require('../../docs/config/swagger.json');
+const swaggerDocs = require(`${cwd}/docs/config/swagger.json`);
 
+/**
+ * Express router to mount REST method functions on
+ * @type {object}
+ * @const
+ * @namespace router
+ */
 const router = express.Router();
 
 // Evaluate the model, dynamically
 router.param('model', modelFinder);
 
+router.use('/api/v1/doc', swagger.serve, swagger.setup(swaggerDocs));
 
 // API Routes
-router.use('/api/v1/doc', swagger.serve, swagger.setup(swaggerDocs));
 router.get('/api/v1/:model', handleGetAll);
 router.post('/api/v1/:model', handlePost);
 
@@ -60,22 +71,22 @@ router.delete('/api/v1/:model/:id', handleDelete);
 // Route Handlers
 
 /**
- * Fetches all records from a given model.
+ * Fetches all records from a given model
  * @example router.get('/api/v1/:model', handleGetAll);
  * @param req {object} Express Request Object (required params: model)
  * @param res {object} Express Response Object
  * @param next {function} Express middleware next()
  */
-function handleGetAll(request,response,next) {
+function handleGetAll(request, response, next) {
   request.model.get()
-    .then( data => {
+    .then(data => {
       const output = {
         count: data.length,
         results: data,
       };
       response.status(200).json(output);
     })
-    .catch( next );
+    .catch(next);
 }
 
 /**
@@ -85,10 +96,10 @@ function handleGetAll(request,response,next) {
  * @param res {object} Express Response Object
  * @param next {function} Express middleware next()
  */
-function handleGetOne(request,response,next) {
+function handleGetOne(request, response, next) {
   request.model.get(request.params.id)
-    .then( result => response.status(200).json(result[0]) )
-    .catch( next );
+    .then(result => response.status(200).json(result[0]))
+    .catch(next);
 }
 
 /**
@@ -98,10 +109,10 @@ function handleGetOne(request,response,next) {
  * @param res {object} Express Response Object
  * @param next {function} Express middleware next()
  */
-function handlePost(request,response,next) {
+function handlePost(request, response, next) {
   request.model.post(request.body)
-    .then( result => response.status(200).json(result) )
-    .catch( next );
+    .then(result => response.status(200).json(result))
+    .catch(next);
 }
 
 /**
@@ -111,10 +122,10 @@ function handlePost(request,response,next) {
  * @param res {object} Express Response Object
  * @param next {function} Express middleware next()
  */
-function handlePut(request,response,next) {
+function handlePut(request, response, next) {
   request.model.put(request.params.id, request.body)
-    .then( result => response.status(200).json(result) )
-    .catch( next );
+    .then(result => response.status(200).json(result))
+    .catch(next);
 }
 
 /**
@@ -124,10 +135,10 @@ function handlePut(request,response,next) {
  * @param res {object} Express Response Object
  * @param next {function} Express middleware next()
  */
-function handleDelete(request,response,next) {
+function handleDelete(request, response, next) {
   request.model.delete(request.params.id)
-    .then( result => response.status(200).json(result) )
-    .catch( next );
+    .then(result => response.status(200).json(result))
+    .catch(next);
 }
 
 module.exports = router;
@@ -141,13 +152,13 @@ module.exports = router;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-middleware_500.html">middleware/500</a></li><li><a href="module-middleware_model-finder.html">middleware/model-finder</a></li><li><a href="module-models_categories_categories-model.html">models/categories/categories-model</a></li><li><a href="module-models_memory-model.html">models/memory-model</a></li><li><a href="module-models_mongo-model.html">models/mongo-model</a></li><li><a href="module-src_api_v1.html">src/api/v1</a></li><li><a href="module-src_app.html">src/app</a></li><li><a href="module-src_middleware_404.html">src/middleware/404</a></li></ul><h3>Classes</h3><ul><li><a href="module-models_categories_categories-model-Categories.html">Categories</a></li><li><a href="module-models_memory-model-Model.html">Model</a></li><li><a href="module-models_mongo-model-Model.html">Model</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-middleware_500.html">middleware/500</a></li><li><a href="module-middleware_model-finder.html">middleware/model-finder</a></li><li><a href="module-models_categories_categories-model.html">models/categories/categories-model</a></li><li><a href="module-models_memory-model.html">models/memory-model</a></li><li><a href="module-models_mongo-model.html">models/mongo-model</a></li><li><a href="module-src_api_v1.html">src/api/v1</a></li><li><a href="module-src_app.html">src/app</a></li><li><a href="module-src_auth_middleware.html">src/auth/middleware</a></li><li><a href="module-src_auth_new-routes.html">src/auth/new-routes</a></li><li><a href="module-src_auth_router.html">src/auth/router</a></li><li><a href="module-src_auth_users-model.html">src/auth/users-model</a></li><li><a href="module-src_middleware_404.html">src/middleware/404</a></li></ul><h3>Classes</h3><ul><li><a href="module-models_categories_categories-model-Categories.html">Categories</a></li><li><a href="module-models_memory-model-Model.html">Model</a></li><li><a href="module-models_mongo-model-Model.html">Model</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-src_api_v1-router.html">router</a></li><li><a href="module-src_auth_router-authRouter.html">authRouter</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Apr 07 2019 07:58:16 GMT-0700 (Pacific Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Apr 07 2019 18:15:27 GMT-0700 (Pacific Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

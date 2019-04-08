@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Model</title>
+    <title>JSDoc: Module: src/auth/users-model</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Model</h1>
+    <h1 class="page-title">Module: src/auth/users-model</h1>
 
     
 
@@ -28,8 +28,8 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>
-            <span class="ancestors"><a href="module-models_mongo-model.html">models/mongo-model</a>~</span>Model<span class="signature">(schema)</span><span class="type-signature"></span></h2>
+        
+            
         
     
 </header>
@@ -38,76 +38,21 @@
     <div class="container-overview">
     
         
-
-    
-
-    
-    <h4 class="name" id="Model"><span class="type-signature"></span>new Model<span class="signature">(schema)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Model constructor function. Any new instance is created by passing in a schema to define the structure of the data in each model.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
+            <div class="description">Users Model
+Provides schema for MongoDB and methods to aide user validation and authorization</div>
         
 
         
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>schema</code></td>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
 
 
-            
-            </td>
 
-            
 
-            
 
-            <td class="description last">An outline of the fields and pieces of data that are required by each data model. This may vary in each Model instance, e.g., the Players data model may have different required fields in its schema than the Teams data model.</td>
-        </tr>
 
-    
-    </tbody>
-</table>
+
+
 
 
 
@@ -143,7 +88,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_mongo-model.js.html">models/mongo-model.js</a>, <a href="models_mongo-model.js.html#line12">line 12</a>
+        <a href="auth_users-model.js.html">auth/users-model.js</a>, <a href="auth_users-model.js.html#line12">line 12</a>
     </li></ul></dd>
     
 
@@ -171,11 +116,22 @@
 
 
 
+        
     
     </div>
 
     
 
+    
+        <h3 class="subsection-title">Requires</h3>
+
+        <ul>
+            <li>module:mongoose</li>
+        
+            <li>module:bcrypt</li>
+        
+            <li>module:jsonwebtoken</li>
+        </ul>
     
 
     
@@ -197,16 +153,12 @@
     
 
     
-    <h4 class="name" id="delete"><span class="type-signature"></span>delete<span class="signature">(_id)</span><span class="type-signature"> &rarr; {object}</span></h4>
+    <h4 class="name" id="~Userclassmethodtoauthenticateatokenfromtherequestheaderusingthesecretandfindtheuserinthedatabase"><span class="type-signature">(inner) </span>User class method to authenticate a token from the request header using the secret and find the user in the database<span class="signature">(token)</span><span class="type-signature"></span></h4>
     
 
     
 
 
-
-<div class="description">
-    Makes an http DELETE request to destroy an existing record in the database
-</div>
 
 
 
@@ -241,7 +193,7 @@
 
         <tr>
             
-                <td class="name"><code>_id</code></td>
+                <td class="name"><code>token</code></td>
             
 
             <td class="type">
@@ -257,7 +209,7 @@
 
             
 
-            <td class="description last">Unique identifier of an individual record (UUID format)</td>
+            <td class="description last">The authentication token</td>
         </tr>
 
     
@@ -298,7 +250,400 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_mongo-model.js.html">models/mongo-model.js</a>, <a href="models_mongo-model.js.html#line50">line 50</a>
+        <a href="auth_users-model.js.html">auth/users-model.js</a>, <a href="auth_users-model.js.html#line96">line 96</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~Userclassmethodtoauthenticateausernameandpasswordfromtherequestheaderagainsttheuserstoredinthedatabase"><span class="type-signature">(inner) </span>User class method to authenticate a username and password from the request header against the user stored in the database<span class="signature">(auth)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>auth</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The username and password passed in with the request header</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="auth_users-model.js.html">auth/users-model.js</a>, <a href="auth_users-model.js.html#line116">line 116</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~UserclassmethodtofindorcreateauserinthedatabasewhenOAuthisused"><span class="type-signature">(inner) </span>User class method to find or create a user in the database when OAuth is used<span class="signature">(email)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>email</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Email address entered</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="auth_users-model.js.html">auth/users-model.js</a>, <a href="auth_users-model.js.html#line74">line 74</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~Userinstancemethodtochecktheuser'sACLcapabilitiesagainsttheroute'srequirements"><span class="type-signature">(inner) </span>User instance method to check the user's ACL capabilities against the route's requirements<span class="signature">(capability)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>capability</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">'read', create', 'update', 'delete', or 'superuser'</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="auth_users-model.js.html">auth/users-model.js</a>, <a href="auth_users-model.js.html#line162">line 162</a>
     </li></ul></dd>
     
 
@@ -325,7 +670,7 @@
 
         
 <div class="param-desc">
-    Empty object to indicate that record was successfully deleted.
+    true/false depending on if the user has that capability
 </div>
 
 
@@ -336,7 +681,7 @@
     </dt>
     <dd>
         
-<span class="param-type">object</span>
+<span class="param-type">boolean</span>
 
 
     </dd>
@@ -354,16 +699,12 @@
     
 
     
-    <h4 class="name" id="get"><span class="type-signature"></span>get<span class="signature">(_id)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~Userinstancemethodtocompareapasswordagainstthehashedpasswordattachedtoauserrecordfromthedatabase"><span class="type-signature">(inner) </span>User instance method to compare a password against the hashed password attached to a user record from the database<span class="signature">(password)</span><span class="type-signature"></span></h4>
     
 
     
 
 
-
-<div class="description">
-    Makes an http GET request for an individual record (by _id) or a list of all records if no _id is provided
-</div>
 
 
 
@@ -398,7 +739,7 @@
 
         <tr>
             
-                <td class="name"><code>_id</code></td>
+                <td class="name"><code>password</code></td>
             
 
             <td class="type">
@@ -414,7 +755,7 @@
 
             
 
-            <td class="description last">Unique identifier of an individual record (UUID format)</td>
+            <td class="description last">The password passed in with the request header</td>
         </tr>
 
     
@@ -455,7 +796,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_mongo-model.js.html">models/mongo-model.js</a>, <a href="models_mongo-model.js.html#line21">line 21</a>
+        <a href="auth_users-model.js.html">auth/users-model.js</a>, <a href="auth_users-model.js.html#line128">line 128</a>
     </li></ul></dd>
     
 
@@ -478,16 +819,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    The result of the query, either an individual record or all records in a collection.
-</div>
-
-
-
-    
 
 
 
@@ -499,16 +830,12 @@
     
 
     
-    <h4 class="name" id="post"><span class="type-signature"></span>post<span class="signature">(record)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~Userinstancemethodtogenerateanewtokenwiththeuser'sid,"><span class="type-signature">(inner) </span>User instance method to generate a new token with the user's id,<span class="signature">(type)</span><span class="type-signature"></span></h4>
     
 
     
 
 
-
-<div class="description">
-    Makes an http POST request to create a new record in a database.
-</div>
 
 
 
@@ -543,142 +870,7 @@
 
         <tr>
             
-                <td class="name"><code>record</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">New record to write to database in JSON format. Must contain required fields defined in schema.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_mongo-model.js.html">models/mongo-model.js</a>, <a href="models_mongo-model.js.html#line30">line 30</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="put"><span class="type-signature"></span>put<span class="signature">(_id, record)</span><span class="type-signature"> &rarr; {object}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Makes an http PUT request to edit an existing record in the database
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>_id</code></td>
+                <td class="name"><code>type</code></td>
             
 
             <td class="type">
@@ -694,30 +886,7 @@
 
             
 
-            <td class="description last">Unique identifier of an individual record (UUID format)</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>record</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Updated record to write to database in JSON format. Must contain required fields defined in schema.</td>
+            <td class="description last">'key' or undefined; checks if the token being generated should expire</td>
         </tr>
 
     
@@ -758,7 +927,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_mongo-model.js.html">models/mongo-model.js</a>, <a href="models_mongo-model.js.html#line41">line 41</a>
+        <a href="auth_users-model.js.html">auth/users-model.js</a>, <a href="auth_users-model.js.html#line138">line 138</a>
     </li></ul></dd>
     
 
@@ -781,28 +950,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    Updated record from the database
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">object</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 

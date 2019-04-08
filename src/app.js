@@ -38,8 +38,8 @@ app.use(notFound);
 app.use(errorHandler);
 
 /**
- * Start Server on specified port
- * @param port {integer} (defaults to process.env.PORT)
+ * Starts server on specified port
+ * @param port {integer} Port used to run the server, defaults to process.env.PORT
  */
 let isRunning = false;
 
