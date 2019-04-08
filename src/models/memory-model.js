@@ -4,7 +4,7 @@ const uuid = require('uuid/v4');
 
 /**
  * Memory Data Model
- * @module models/memory-model
+ * @module src/models/memory-model
  */
 class Model {
 

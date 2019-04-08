@@ -1,7 +1,7 @@
 'use strict';
 /**
  * Model Finder Middleware
- * @module middleware/model-finder
+ * @module src/middleware/model-finder
  */
 
 /**

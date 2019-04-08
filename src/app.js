@@ -42,7 +42,7 @@ app.use(errorHandler);
  * @param port {integer} Port used to run the server, defaults to process.env.PORT
  */
 let isRunning = false;
-
+const populateRoles = require('./middleware/populate-roles.js');
 module.exports = {
   server: app,
   start: (port) => {
@@ -50,6 +50,8 @@ module.exports = {
       app.listen(port, () => {
         isRunning = true;
         console.log(`Server Up on ${port}`);
+        app.post('/roles', populateRoles);
+        populateRoles();
       });
     }
     else {

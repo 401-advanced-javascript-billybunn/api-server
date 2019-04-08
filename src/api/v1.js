@@ -17,6 +17,8 @@ const express = require('express');
 const swagger = require('swagger-ui-express');
 
 const modelFinder = require(`${cwd}/src/middleware/model-finder.js`);
+const auth = require(`${cwd}/src/auth/middleware.js`);
+
 const swaggerDocs = require(`${cwd}/docs/config/swagger.json`);
 
 /**
@@ -34,11 +36,11 @@ router.use('/api/v1/doc', swagger.serve, swagger.setup(swaggerDocs));
 
 // API Routes
 router.get('/api/v1/:model', handleGetAll);
-router.post('/api/v1/:model', handlePost);
+router.post('/api/v1/:model', auth('create'), handlePost);
 
 router.get('/api/v1/:model/:id', handleGetOne);
-router.put('/api/v1/:model/:id', handlePut);
-router.delete('/api/v1/:model/:id', handleDelete);
+router.put('/api/v1/:model/:id', auth('update'), handlePut);
+router.delete('/api/v1/:model/:id', auth('delete'), handleDelete);
 
 // Route Handlers
 

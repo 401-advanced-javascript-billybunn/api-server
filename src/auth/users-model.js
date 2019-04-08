@@ -94,7 +94,8 @@ users.statics.createFromOauth = function (email) {
 };
 
 /**
- * @method
+ * @method 
+ * @name authenticateToken
  * User class method to authenticate a token from the request header using the secret and find the user in the database
  * @param {string} token The authentication token
  */
