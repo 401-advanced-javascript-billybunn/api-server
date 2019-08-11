@@ -1,7 +1,7 @@
 'use strict';
 /**
  * Categories Model
- * @module models/categories/categories-model
+ * @module src/models/categories/categories-model
  */
 
 const Model = require('../memory-model.js');

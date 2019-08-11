@@ -1,7 +1,7 @@
 'use strict';
 /**
  * Mongo Data Model Interface
- * @module models/mongo-model
+ * @module src/models/mongo-model
  */
 class Model {
   /**

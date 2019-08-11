@@ -14,18 +14,19 @@ echo '{"username":"eddie", "password":"eddie", "role":"editor"}' | http :3000/si
 echo '{"username":"addie", "password":"addie", "role":"admin"}' | http :3000/signup
 echo '{"username":"susie", "password":"susie", "role":"superuser"}' | http :3000/signup
 
-superuser guy key:
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjYTZjNzFkYjE3YTAwM2FhYjUyMjEyZiIsInR5cGUiOiJrZXkiLCJpYXQiOjE1NTQ2NDA4MzB9.lNpU_iMPXzIJtXVmRqACmmr2ZvPMUlY3R8QkuNQkKqE
 
-editor jerry key: 
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjYTZiZDIwNzJkMjc0MzZmOTRkOWVkMyIsInR5cGUiOiJrZXkiLCJpYXQiOjE1NTQ2NDE5NjF9.3XQ7brtY8iubbx3mB49ccX0l_5ODvo-LaO4Iy23Rgbs
-
-http post :3000/signin "Authorization: Bearer token"
-
-http :3000/hidden-stuff "Authorization: Bearer token"
-
-
+HTTPie CLI commands to try accessing some routes:
+http post :3000/signin "Authorization: Bearer <token>"
+http :3000/hidden-stuff "Authorization: Bearer <token>"
+http patch :3000/jp "Authorization: Bearer <token>"
 */
+
+/**
+ * New Routes Module
+ * Provides example routes to use with basic/bearer authorization methods
+ * @module src/auth/new-routes
+ * @requires express
+ */
 
 const express = require('express');
 const router = express.Router();

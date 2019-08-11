@@ -14,15 +14,7 @@ teams.virtual('players', {
   foreignField: 'team',
   justOne:false,
 });
-/**
- * @param  {} 'find'
- * @param  {} function(
- * @param  {} {try{this.populate('players'
- * @param  {} ;}catch(e
- * @param  {} {console.error('FindError'
- * @param  {} e
- * @param  {} ;}}
- */
+
 teams.pre('find', function() {
   try {
     this.populate('players');

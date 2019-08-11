@@ -13,8 +13,6 @@ const cors = require('cors');
 const morgan = require('morgan');
 
 // Esoteric Resources
-console.log('cwd', cwd);
-console.log('dirname', __dirname);
 const errorHandler = require(`${__dirname}/middleware/500.js`);
 const notFound = require(`${__dirname}/middleware/404.js`);
 const authRouter = require(`${__dirname}/auth/router.js`);
@@ -40,11 +38,11 @@ app.use(notFound);
 app.use(errorHandler);
 
 /**
- * Start Server on specified port
- * @param port {integer} (defaults to process.env.PORT)
+ * Starts server on specified port
+ * @param port {integer} Port used to run the server, defaults to process.env.PORT
  */
 let isRunning = false;
-
+const populateRoles = require('./middleware/populate-roles.js');
 module.exports = {
   server: app,
   start: (port) => {
@@ -52,6 +50,8 @@ module.exports = {
       app.listen(port, () => {
         isRunning = true;
         console.log(`Server Up on ${port}`);
+        app.post('/roles', populateRoles);
+        populateRoles();
       });
     }
     else {

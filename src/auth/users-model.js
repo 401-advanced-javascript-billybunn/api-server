@@ -2,11 +2,21 @@
 
 /*
 http :3000/hidden-stuff "Authorization: Bearer "
-// echo '{"role":"superuser", "capabilities":["create","read","update","delete"]}' | http :3000/roles
-// echo '{"role":"admin", "capabilities":["read","update","delete"]}' | http :3000/roles
-// echo '{"role":"editor", "capabilities":["create", "read", "update"]}' | http :3000/roles
-// echo '{"role":"user", "capabilities":["read"]}' | http :3000/roles
+echo '{"role":"superuser", "capabilities":["create","read","update","delete"]}' | http :3000/roles
+echo '{"role":"admin", "capabilities":["read","update","delete"]}' | http :3000/roles
+echo '{"role":"editor", "capabilities":["create", "read", "update"]}' | http :3000/roles
+echo '{"role":"user", "capabilities":["read"]}' | http :3000/roles
+
 */
+
+/**
+ * Users Model
+ * Provides schema for MongoDB and methods to aide user validation and authorization
+ * @module src/auth/users-model
+ * @requires mongoose
+ * @requires bcrypt
+ * @requires jsonwebtoken
+ */
 
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
@@ -29,6 +39,9 @@ const users = new mongoose.Schema({
   toJSON: { virtuals: true },
 });
 
+/**
+ * Creates a virtual field in the Users schema that is populated by the matching role in the Roles collection
+ */
 users.virtual('abilities', {
   ref: 'roles',
   localField: 'role',
@@ -36,6 +49,9 @@ users.virtual('abilities', {
   justOne: false,
 });
 
+/**
+ * Mongoose hook to populate the Users virtual field before finding a document in the database
+ */
 users.pre('findOne', function () {
   try {
     this.populate('abilities');
@@ -43,6 +59,9 @@ users.pre('findOne', function () {
   catch (error) { console.log('Find Error', error); }
 });
 
+/**
+ * Mongoose hook to hash user passwords before they are stored in the database
+ */
 users.pre('save', function (next) {
   bcrypt.hash(this.password, 10)
     .then(hashedPassword => {
@@ -52,6 +71,11 @@ users.pre('save', function (next) {
     .catch(error => { throw new Error(error); });
 });
 
+/**
+ * @method
+ * User class method to find or create a user in the database when OAuth is used 
+ * @param  {string} email Email address entered
+ */
 users.statics.createFromOauth = function (email) {
 
   if (!email) { return Promise.reject('Validation Error'); }
@@ -69,6 +93,12 @@ users.statics.createFromOauth = function (email) {
 
 };
 
+/**
+ * @method 
+ * @name authenticateToken
+ * User class method to authenticate a token from the request header using the secret and find the user in the database
+ * @param {string} token The authentication token
+ */
 users.statics.authenticateToken = function (token) {
 
   if (usedTokens.has(token)) {
@@ -84,6 +114,11 @@ users.statics.authenticateToken = function (token) {
 
 };
 
+/**
+ * @method
+ * User class method to authenticate a username and password from the request header against the user stored in the database
+ * @param {object} auth The username and password passed in with the request header
+ */
 users.statics.authenticateBasic = function (auth) {
   let query = { username: auth.username };
   return this.findOne(query)
@@ -91,16 +126,26 @@ users.statics.authenticateBasic = function (auth) {
     .catch(error => { throw error; });
 };
 
+/**
+ * @method
+ * User instance method to compare a password against the hashed password attached to a user record from the database
+ * @param {string} password The password passed in with the request header
+ */
 users.methods.comparePassword = function (password) {
   return bcrypt.compare(password, this.password)
     .then(valid => valid ? this : null);
 };
 
+/**
+ * @method
+ * User instance method to generate a new token with the user's id, 
+ * @param {string} type 'key' or undefined; checks if the token being generated should expire
+ */
 users.methods.generateToken = function (type) {
 
   let token = {
     id: this._id,
-    capabilities: this.capabilities,
+    // capabilities: this.capabilities,
 
     type: type || 'user',
   };
@@ -115,6 +160,12 @@ users.methods.generateToken = function (type) {
 
 // takes a capability: 'read', create', 'update', 'delete'
 // returns true/false depending on if the user has that capability
+/**
+ * @method
+ * User instance method to check the user's ACL capabilities against the route's requirements
+ * @param {string} capability 'read', create', 'update', 'delete', or 'superuser'
+ * @returns {boolean} true/false depending on if the user has that capability
+ */
 users.methods.can = function (capability) {
   console.log(`This route requires the "${capability}" capability to access.
 User "${this.username}" has the following abilities: ${this.abilities[0].capabilities}`);

@@ -1,4 +1,10 @@
 'use strict';
+/**
+ * Roles Model
+ * Provides schema for MongoDB for ACL roles
+ * @module src/auth/roles-model
+ * @requires mongoose
+ */
 
 const mongoose = require('mongoose');
 
